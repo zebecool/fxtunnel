@@ -1,20 +1,17 @@
 # fxtunnel
 [![MIT License](https://img.shields.io/github/license/xiaocong/uiautomator.svg)](http://opensource.org/licenses/MIT)
-
 Two-way port mapping tool, supports TCP and UDP, Secure connection using SSL.
 
-
 ## Introduce
-* abc
-* 123
-
+* Supports port mapping for TCP and UDP protocols
+* Cross-platform, Windows, Linux, MacOS
+* Using select asynchronous events is not suitable for large concurrency scenarios
+* Openssl secure tunnel
 
 ## Architecture
 * Agent is responsible for port listening
 * Connector is responsible for connecting to the destination port
-
 ![architecture](https://github.com/zebecool/fxtunnel/blob/main/architecture.jpg)
-
 
 ## Compile and Install
 
