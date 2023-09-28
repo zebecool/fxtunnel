@@ -8,6 +8,11 @@ Two-way port mapping tool, supports TCP and UDP, Secure connection using SSL.
 * Cross-platform, Windows, Linux, MacOS
 * Using select asynchronous events is not suitable for large concurrency scenarios
 * Openssl secure tunnel
+* Protocol parameter
+  - `tcp_sa`  TCP protocol.  Listening mapped port on the server, client is responsible for connecting to the destination port
+  - `tcp_sc`  TCP protocol.  Server is responsible for connecting to the destination port, Listening mapped port on the client
+  - `udp_sa`  UDP protocol.  Listening mapped port on the server, client is responsible for connecting to the destination port
+  - `udp_sc`  UDP protocol.  Server is responsible for connecting to the destination port, Listening mapped port on the client
 
 ## Architecture
 * Agent is responsible for port listening
