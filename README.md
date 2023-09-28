@@ -1,5 +1,5 @@
 # fxtunnel
-[![MIT License](https://img.shields.io/github/license/xiaocong/uiautomator.svg)](http://opensource.org/licenses/MIT)
+[![MIT License]([https://img.shields.io/github/license/xiaocong/uiautomator.svg](http://opensource.org/licenses/MIT)
 
 Two-way port mapping tool, supports TCP and UDP, Secure connection using SSL.
 
