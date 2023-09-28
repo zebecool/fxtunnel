@@ -12,7 +12,7 @@ Two-way port mapping tool, supports TCP and UDP, Secure connection using SSL.
 ## Architecture
 采用 VUE + Element UI + Python + Tornado + Sqlite3
 
-![architecture](https://raw.github.com/zebecool/fxtunnel/master/architecture.png)
+![architecture](https://github.com/zebecool/fxtunnel/blob/main/architecture.jpg)
 
 
 VUE采用多页模式
