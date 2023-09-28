@@ -10,12 +10,10 @@ Two-way port mapping tool, supports TCP and UDP, Secure connection using SSL.
 
 
 ## Architecture
-采用 VUE + Element UI + Python + Tornado + Sqlite3
+* Agent is responsible for port listening
+* Connector is responsible for connecting to the destination port
 
 ![architecture](https://github.com/zebecool/fxtunnel/blob/main/architecture.jpg)
-
-
-VUE采用多页模式
 
 
 ## Compile and Install
