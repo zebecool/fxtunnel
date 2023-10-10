@@ -21,6 +21,13 @@ Two-way port mapping tool, supports TCP and UDP, Secure connection using SSL.
 
 ## Configuration File
 * The server and client have the same code, and the running role is determined based on the "mode" field in the configuration file.
+    ```
+	fxtunnel-server                         fxtunnel-client
+	    - fxtunnel                              - fxtunnel
+		- fxtunnel.conf                         - fxtunnel.conf
+		- server.crt
+		- server.key
+	```
 * The server needs to configure certificate files `server.crt` and `server.key`.
     ```
 	openssl genrsa -out server.key 1024
@@ -99,7 +106,6 @@ $ make install
 
 ## PPForward
 ![PPForward](http://ppforward.com/assets/images/logo-dark.png) 
-
 
 
 
