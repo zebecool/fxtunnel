@@ -83,16 +83,18 @@ Compiling is straight forward with cmake
 
 For e.g., on Linux/OS X/FreeBSD:
 ```
-$ git clone https://github.com/amhndu/SimpleNES
-$ cd SimpleNES
+$ git clone https://github.com/zebecool/fxtunnel.git
+$ cd fxtunnel
 $ mkdir build && cd build
-$ cmake -DCMAKE_BUILD_TYPE=Release ..
 $ cmake ../
 $ make install
 ```
 
+
 ## PPForward
 ![PPForward](http://ppforward.com/assets/images/logo-dark.png) 
 * come soon.
+
+
 
 
