@@ -21,7 +21,14 @@ Two-way port mapping tool, supports TCP and UDP, Secure connection using SSL.
 
 ## Configuration File
 * The server and client have the same code, and the running role is determined based on the "mode" field in the configuration file.
-* Server side
+* The server needs to configure certificate files `server.crt` and `server.key`.
+    ```
+	openssl genrsa -out server.key 1024
+	```
+	```
+	openssl req -new -x509 -days 3650 -key server.key -out server.crt -subj "/C=CN/ST=xxname/L=xxname/O=xxname/OU=xxname/CN=xxdomain"
+	```
+* Server side (fxtunnel.conf) 
     ```
     {
         "log_level": "debug",
@@ -63,7 +70,7 @@ Two-way port mapping tool, supports TCP and UDP, Secure connection using SSL.
     }
     ```
 
-* Client side
+* Client side (fxtunnel.conf) 
     ```
     {
         "log_level": "info",
@@ -80,9 +87,7 @@ You need:
 * Openssl development headers and library
 * CMake build system
 
-Compiling is straight forward with cmake
-
-For e.g., on Linux/OS X/FreeBSD:
+Compiling is straight forward with cmake, For e.g., on Linux/OS X/FreeBSD:
 ```
 $ git clone https://github.com/zebecool/fxtunnel.git
 $ cd fxtunnel
@@ -94,7 +99,8 @@ $ make install
 
 ## PPForward
 ![PPForward](http://ppforward.com/assets/images/logo-dark.png) 
-* come soon.
+
+
 
 
 
