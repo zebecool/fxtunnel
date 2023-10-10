@@ -150,6 +150,7 @@ static inline uint64_t get_digit18_uuid() {
 // sleep (micro seconds)
 static inline void fx_sleep(int msec_timeout)
 {
+    //std::this_thread::sleep_for(std::chrono::milliseconds(msec_timeout));
 #ifdef _WIN32
     Sleep(msec_timeout);
 #else

@@ -140,7 +140,7 @@ int connmgr::connect_task()
     while (!exit) {
         qitem = (queitem*)connect_que->get(timeout);
         if (qitem) {
-            /* uint64_t token = qitem->token; */ uint64_t usid = qitem->usid; uint64_t seid = qitem->seid;
+            uint64_t usid = qitem->usid; uint64_t seid = qitem->seid;
             delete qitem;
             conn* c = get_conn(usid);
             if (c) {
@@ -209,39 +209,6 @@ int connmgr::connect_task()
     }
     return 0;
 }
-/*
-int connmgr::connect_task_2()
-{
-    int ret = 0; connclt* cclt = NULL; queitem* qitem = NULL;
-    while (!exit) {
-        qitem = (queitem*)connect_que->get(100); if (qitem == NULL) { continue; }
-        uint64_t usid = qitem->usid; uint64_t seid = qitem->seid;
-        delete qitem;
-        conn* c = get_conn(usid);
-        if (c == NULL) continue;
-        //try connect
-        cclt = new connclt(seid, c);
-        ret = cclt->_connect_ex(c->connect_ipaddr.c_str(), c->connect_port, 5);
-        if (ret >= 0) {
-            queitem* qitem_c = new queitem(103);
-            qitem_c->usid = usid; qitem_c->seid = cclt->seid; qitem_c->ptr = (void*)cclt;
-            pairfd->notify(qitem_c);
-            logt("Connect to server[ %s : %d ] success. seid[ %llu ]", cclt->ipaddr.c_str(), cclt->port, cclt->seid);
-            c->notify_connect_state(cclt->seid, MSG_CMD__TCP_AGT_CONNECT);
-        } else {
-            logt("Connect server[ %s : %d ] failure. seid[ %llu ]", cclt->ipaddr.c_str(), cclt->port, cclt->seid);
-            c->notify_connect_state(cclt->seid, MSG_CMD__TCP_AGT_DISCONNECT);
-            delete cclt;
-        }
-    }
-    //clean queue
-    while (true) {
-        queitem* qitem = (queitem*)connect_que->get(); if (qitem == NULL) break;
-        delete qitem;
-    }
-    return 0;
-}
-*/
 void connmgr_connect_thread(connmgr* _cmgr)
 {
     logd("start connmgr connect_task");

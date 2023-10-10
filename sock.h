@@ -5,18 +5,14 @@
 // message type
 enum {
     MSG_T__AUTH = 0,  // Link auth
-    MSG_T__PING,  // ping test
-    MSG_T__FORWARD,  // forward data
-    MSG_T__NOTIFY,  // notify message
-    MSG_T__UBM = 10,  // User business message
+    MSG_T__PING,      // ping heartbeat
+    MSG_T__FORWARD,   // forward data
 }; // MSG_TYPE
 static inline const char* TYPE_S(int type) {
     switch (type) {
         case MSG_T__AUTH: return "MSG_T__AUTH";
         case MSG_T__PING: return "MSG_T__PING";
         case MSG_T__FORWARD: return "MSG_T__FORWARD";
-        case MSG_T__NOTIFY: return "MSG_T__NOTIFY";
-        case MSG_T__UBM: return "MSG_T__UBM";
         default: return "UNKNOWN_TYPE";
     }
 };
@@ -231,17 +227,6 @@ static inline void _close_socket(int _sock) {
     close(_sock);
 #endif
 };
-
-/*
-static inline void close_socket(int _sock) {
-#ifdef WIN32
-    ::closesocket(_sock);
-#else
-    close(_sock);
-#endif
-};
-*/
-
 static inline void _set_sock_nonblock(int _sock) {
     int ret = 0;
 #ifdef WIN32
@@ -294,31 +279,10 @@ public:
     };
     virtual ~fxsock() {
         //logt("Destroy one Tcp Sock");
-        //_disconnect();
         free((void*)r_buf);
     };
     void _set_nonblock() {
         _set_sock_nonblock(sock);
-#if 0
-        int ret = 0;
-#ifdef WIN32
-        //set no-block
-        ULONG NonBlock = 1;
-        ret = ioctlsocket(sock, FIONBIO, &NonBlock); assert(ret != SOCKET_ERROR);
-        //set TCP_NODELAY
-        int on = 1;
-        ret = setsockopt(sock, SOL_SOCKET, SO_KEEPALIVE, (const char*)&on, sizeof(on)); assert(ret != SOCKET_ERROR);
-        ret = setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (const char*)&on, sizeof(on)); assert(ret != SOCKET_ERROR);
-#else
-        //set no-block
-        int flags = 1;
-        flags = fcntl(sock, F_GETFL); flags |= O_NONBLOCK; fcntl(sock, F_SETFL, flags);
-        //set TCP_NODELAY
-        flags = 1; ret = setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (char*)&flags, sizeof(flags)); assert(ret == 0);
-        //keepalive
-        flags = 1; ret = setsockopt(sock, SOL_SOCKET, SO_KEEPALIVE, &flags, sizeof(flags)); assert(ret == 0);
-#endif
-#endif
     };
     int _connect(std::string _addr, int _port) {
         addr = _addr; port = _port;
@@ -496,7 +460,6 @@ public:
     };
     bool is_connected() { return connected; };
 public:
-    //int type; //for sub-class
     std::atomic<bool> connected;
     int    sock;
     char*  r_buf;
@@ -684,17 +647,6 @@ public:
     ~pairudpsock() {
         _close_socket(rx_fd); _close_socket(tx_fd);
     };
-    /*
-    int notify(uint16_t _type, uint64_t _dest, void* _ptr, uint16_t _len) {
-        queitem* qitem = new queitem(_type);
-        qitem->u64_param = _dest; qitem->ptr = _ptr; qitem->i_param = _len;
-        que->put(qitem);
-        sockaddr_in addr_in; ::memset(&addr_in, 0, sizeof(struct sockaddr_in));
-        addr_in.sin_family = AF_INET;
-        addr_in.sin_addr.s_addr = inet_addr(ipaddr); addr_in.sin_port = htons(port);
-        return ::sendto(tx_fd, "*", 1, 0, (sockaddr*)&addr_in, sizeof(struct sockaddr_in));
-    };
-    */
     int notify(queitem* _qitem) {
         que->put(_qitem);
         sockaddr_in addr_in; ::memset(&addr_in, 0, sizeof(struct sockaddr_in));

@@ -109,7 +109,6 @@ int load_config(const char* _config_filepath, mjson& _json_conf)
 
 #ifdef __linux__
 
-//std::string log_level_s;
 std::string pidfile = "fxtunnel.pid";
 
 std::string fifo_rx_filepath;

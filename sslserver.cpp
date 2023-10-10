@@ -15,41 +15,6 @@ sslconn::sslconn(uint64_t _token, int _cfd, SSL_CTX* _ctx)
 sslconn::~sslconn() {
     if (r_buf) { free(r_buf); }
 }
-#if 0
-int sslconn::_accept(char* _ipaddr, int _port)
-{
-    ipaddr = _ipaddr; port = _port;
-    _set_sock_nonblock(sock);
-
-    last_update = get_now();
-
-    ssl = SSL_new(ctx);
-    SSL_set_fd(ssl, sock);
-    SSL_set_connect_state(ssl);
-
-    while(true) {
-        if (SSL_accept(ssl) != 1) {
-            int sslerrno = SSL_get_error(ssl, -1);
-            if ((sslerrno == SSL_ERROR_WANT_WRITE) || (sslerrno == SSL_ERROR_WANT_READ)) {
-                char sslerrmsg[1024] = { 0 }; ERR_error_string_n(ERR_get_error(), sslerrmsg, sizeof(sslerrmsg));
-                std::string sslstate = SSL_state_string(ssl);
-                logd("SSL_accept() return, Wait for data to be read. ssl_errno[ %d : %s : %s ]", sslerrno, sslerrmsg, sslstate.c_str());
-                continue;
-            }
-            char sslerrmsg[1024] = { 0 }; ERR_error_string_n(ERR_get_error(), sslerrmsg, sizeof(sslerrmsg));
-            std::string sslstate = SSL_state_string(ssl);
-            logerr("ssl accept error. ssl_errno[ %d : %s : %s ]", sslerrno, sslerrmsg, sslstate.c_str());
-            _close();
-            return -1;
-        }
-        //success
-        ssl_accept = true;
-        logit("accept new ssl connection. [ %s : %d ] token[ %llu ]", ipaddr.c_str(), port, token);
-        break;
-    }
-    return 0;
-}
-#endif
 int sslconn::init(char* _ipaddr, int _port) {
     ipaddr = _ipaddr; port = _port;
     _set_sock_nonblock(sock);

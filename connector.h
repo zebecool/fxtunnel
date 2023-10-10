@@ -151,7 +151,7 @@ public:
     void stop();
 public:
     fxtunnel* fxt;
-    std::map<uint64_t, udpconn*> uconn_map; // usid <---> conn
+    std::map<uint64_t, udpconn*> uconn_map; // usid <---> udpconn
 
     bool exit;  //thread exit flag
     std::thread* select_thread;
