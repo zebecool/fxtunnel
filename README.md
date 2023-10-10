@@ -74,18 +74,25 @@ Two-way port mapping tool, supports TCP and UDP, Secure connection using SSL.
     ```
 
 ## Compile and Install
-1.  服务启动  python main.py start
-2.  默认端口 18997
-2.  H5页面访问地址  http://127.0.0.1:18977/static/login.html
-3.  默认用户 11111111111 密码 2222  具备管理权限，可以编辑考试信息，发布新的考试
-4.  系统具备较完整的功能，完全匿名进行学生的成绩采集，对管理方也是匿名的, 可以完全避免考试成绩泄露
-5.  使用者使用任意无特征的用户名和考试登记码进行考试成绩登记，然后查看总分及各科成绩的班级汇总统计分析
 
+You need:
+* Openssl development headers and library
+* CMake build system
+
+Compiling is straight forward with cmake
+
+For e.g., on Linux/OS X/FreeBSD:
+```
+$ git clone https://github.com/amhndu/SimpleNES
+$ cd SimpleNES
+$ mkdir build && cd build
+$ cmake -DCMAKE_BUILD_TYPE=Release ..
+$ cmake ../
+$ make install
+```
 
 ## PPForward
 ![PPForward](http://ppforward.com/assets/images/logo-dark.png) 
-* come soon.
-* come soon.
 * come soon.
 
 
