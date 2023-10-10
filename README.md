@@ -20,6 +20,7 @@ Two-way port mapping tool, supports TCP and UDP, Secure connection using SSL.
 ![architecture](https://github.com/zebecool/fxtunnel/blob/main/architecture.jpg)
 
 ## Configuration File
+* The server and client have the same code, and the running role is determined based on the "mode" field in the configuration file.
 * Server side
     ```
     {
