@@ -34,19 +34,3 @@ elseif(UNIX)
     # INSTALL(FILES fxtunnel.conf server.crt server.key DESTINATION .)
 endif()
 
-
-
-# Parse error. Expected a command name, got unquoted argument with text "project".
-# 无论CMakeList.txt的第一行指令是什么，运行cmake都这样提错。把txt文件设置为了utf-8的bom编码，修改为utf-8编码即可（对应的是第二条的理由）
-# CMakeLists.txt 一般有以下三种解决办法：
-# 1、Cmake 升级；
-# 2、utf8编码的bug： vim 打开
-#    : set nobomb
-#    : wq!
-
-
-# 低版本centos编译时有问题， 通过下面的命令安装 高版本gcc，然后进行编译
-#    -> sudo yum install centos-release-scl
-#    -> sudo yum install devtoolset-8-gcc*
-#    -> scl enable devtoolset-8 bash
-

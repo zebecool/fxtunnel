@@ -145,10 +145,10 @@ int main(int argc, char* argv[])
 #include "resource.h"
 
 //show detail in menu
-#define _MENU_SHOW_DETAILS 1
+#define _MENU_SHOW_DETAILS 0
 
 //output log window
-#define _WIN32_LOG 1
+#define _WIN32_LOG 0
 
 
 #define ID_TIMER 1
