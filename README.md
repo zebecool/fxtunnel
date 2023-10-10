@@ -22,19 +22,19 @@ Two-way port mapping tool, supports TCP and UDP, Secure connection using SSL.
 ## Configuration File
 * The server and client have the same code, and the running role is determined based on the "mode" field in the configuration file.
     ```
-	fxtunnel-server                         fxtunnel-client
-	    - fxtunnel                              - fxtunnel
-		- fxtunnel.conf                         - fxtunnel.conf
-		- server.crt
-		- server.key
-	```
+    fxtunnel-server                         fxtunnel-client
+        - fxtunnel                              - fxtunnel
+        - fxtunnel.conf                         - fxtunnel.conf
+        - server.crt
+        - server.key
+    ```
 * The server needs to configure certificate files `server.crt` and `server.key`.
     ```
-	openssl genrsa -out server.key 1024
-	```
-	```
-	openssl req -new -x509 -days 3650 -key server.key -out server.crt -subj "/C=CN/ST=xxname/L=xxname/O=xxname/OU=xxname/CN=xxdomain"
-	```
+    openssl genrsa -out server.key 1024
+    ```
+    ```
+    openssl req -new -x509 -days 3650 -key server.key -out server.crt -subj "/C=CN/ST=xxname/L=xxname/O=xxname/OU=xxname/CN=xxdomain"
+    ```
 * Server side (fxtunnel.conf) 
     ```
     {
